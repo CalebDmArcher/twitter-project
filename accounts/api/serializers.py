@@ -15,7 +15,7 @@ class LoginSerializer(serializers.Serializer):
     def validate(self, data):
         if not User.objects.filter(username=data['username'].lower()).exists():
             raise exceptions.ValidationError({
-                'username': 'The user does not exist.'
+                'username': 'User does not exist.'
             })
         return data
 
