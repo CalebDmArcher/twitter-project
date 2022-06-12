@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # django debug toolbar
     'debug_toolbar',
     'tweets',
+    'friendships',
 ]
 
 REST_FRAMEWORK = {
