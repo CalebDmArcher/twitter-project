@@ -5,7 +5,7 @@ class NewsFeedService(object):
 
     @classmethod
     def fanout_to_followers(self, tweet):
-        followers = FriendshipService.got_followers(tweet.user)
+        followers = FriendshipService.get_followers(tweet.user)
 
         # 不允许 for + query
         # 错误的方法

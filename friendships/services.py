@@ -31,5 +31,3 @@ class FriendshipService(object):
             to_user=user,
         ).prefetch_related('from_user')
         return [friendship.from_user for friendship in friendships]
-0
-newsfeeds/__init__.py
