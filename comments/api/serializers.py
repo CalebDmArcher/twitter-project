@@ -10,13 +10,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = (
-            'id',
-            'tweet_id',
-            'user', 'content',
-            'created_at',
-            'updated_at',
-        )
+        fields = ('id', 'tweet_id', 'user', 'content', 'created_at')
 
 
 class CommentSerializerForCreate(serializers.ModelSerializer):
@@ -43,3 +37,15 @@ class CommentSerializerForCreate(serializers.ModelSerializer):
             tweet_id=validated_data['tweet_id'],
             content=validated_data['content'],
         )
+
+
+class CommentSerializerForUpdate(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ('content',)
+
+    def update(self, instance, validated_data):
+        instance.content = validated_data['content']
+        instance.save()
+        # update 方法要求 return 修改后的 instance 作为返回值
+        return instance
