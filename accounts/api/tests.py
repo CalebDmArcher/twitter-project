@@ -60,7 +60,7 @@ class AccountApiTests(TestCase):
         self.assertEqual(response.data['has_logged_in'], True)
 
         # username is wrong
-        print('start testing')
+        # print('start testing')
         response = self.client.post(LOGIN_URL, {
             'username': 'not exist',
             'password': 'correct password',
