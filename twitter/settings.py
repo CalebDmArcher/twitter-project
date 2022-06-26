@@ -23,6 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'rxsf$1mnnm8@gql(-ox^2g!g7!v1t(-xux-cj(ll6&=7mqktbm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = False
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '192.168.33.10', 'localhost']  # host look at virtual
@@ -32,18 +33,23 @@ INTERNAL_IPS = ['10.0.2.2']  # virtual look at host
 # Application definition
 
 INSTALLED_APPS = [
+    # django default
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # third party
+
+    # third party packages
     'rest_framework',
     # project apps
     'accounts',
     # django debug toolbar
     'debug_toolbar',
+    'django_filters',
+
+    # project apps
     'tweets',
     'friendships',
     'newsfeeds',
@@ -52,7 +58,10 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ],
 }
 
 
@@ -135,8 +144,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+try:
+    from .local_settings import *
+except:
+    pass
